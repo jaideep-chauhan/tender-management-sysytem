@@ -23,6 +23,8 @@ const tenderSchema = new mongoose.Schema({
     type: Number,
     default: null,
   },
+},{
+  timestamps: true, 
 });
 
 module.exports = mongoose.model('Tender', tenderSchema);

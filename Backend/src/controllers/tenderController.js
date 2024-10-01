@@ -43,8 +43,12 @@ exports.createTender = async (req, res) => {
 // Get all tenders
 exports.getTenders = async (req, res) => {
   try {
-    const tenders = await Tender.find();
-    res.status(StatusCodes.OK).json({ success: true, data: tenders });
+    const tenders = await Tender.find().sort({ createdAt: -1 });
+
+    if (!tenders.length) {
+      return res.status(StatusCodes.NOT_FOUND).json({ message: 'No tenders found' });
+    }
+    return res.status(StatusCodes.OK).json({ success: true, data: tenders });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Server error', error });
   }

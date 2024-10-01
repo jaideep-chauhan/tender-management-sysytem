@@ -5,7 +5,7 @@ const { StatusCodes } = require('http-status-codes');
 const { notifyNewBid, notifyTenderUpdate } = require('../utils/socketUtils');
 const { ZodError } = require('zod');
 
-// Submit a bid
+// Create a bid
 exports.createBid = async (req, res) => {
   try {
     const parsedData = bidSchema.parse(req.body);
@@ -45,7 +45,7 @@ exports.createBid = async (req, res) => {
       });
     }
 
-     return res.status(StatusCodes.CREATED).json({ success: true, data: bid });
+    return res.status(StatusCodes.CREATED).json({ success: true, data: bid });
 
   } catch (error) {
     if (error instanceof ZodError) {
@@ -59,13 +59,12 @@ exports.createBid = async (req, res) => {
 };
 
 
-// Get all bids for a specific tender
+// Get all bids 
 exports.getAllBids = async (req, res) => {
   try {
-    // const { tenderId } = req.params;
     const bids = await Bid.find().sort({ bidCost: 1 });;
     if (!bids.length) {
-      return res.status(StatusCodes.NOT_FOUND).json({ message: 'No bids found for this tender' });
+      return res.status(StatusCodes.NOT_FOUND).json({ message: 'No bids found' });
     }
 
     return res.status(StatusCodes.OK).json({ success: true, data: bids });

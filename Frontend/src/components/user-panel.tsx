@@ -82,7 +82,7 @@ export default function UserPanel() {
   };
 
   const handleBidSuccess = () => {
-    setIsDialogOpen(false); // Close the dialog when bid is successfully placed
+    setIsDialogOpen(false); 
   };
 
   if (loading) {

@@ -12,6 +12,8 @@ const bidSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   }
+},{
+  timestamps: true, 
 });
 
 module.exports = mongoose.model('Bid', bidSchema);
